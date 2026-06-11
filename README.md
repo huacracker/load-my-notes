@@ -1,5 +1,10 @@
 # load-my-notes
 
+[![GitHub stars](https://img.shields.io/github/stars/huacracker/load-my-notes?style=social)](https://github.com/huacracker/load-my-notes/stargazers)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub release](https://img.shields.io/github/v/release/huacracker/load-my-notes)](https://github.com/huacracker/load-my-notes/releases)
+[![Hermes skill](https://img.shields.io/badge/Hermes-skill-blueviolet)](https://hermes-agent.nousresearch.com/docs)
+
 > 绕 hermes memory 2,200 字符上限的额外记忆加载 skill。
 
 一个 hermes agent skill，让你的"额外记忆"能像手册一样随手加载、搜索、按需部分加载到 AI 对话上下文。
