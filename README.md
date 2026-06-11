@@ -67,6 +67,12 @@ hermes 自带 `obsidian` skill。如果你已经在用 Obsidian vault，**优先
 
 看 [`examples/`](./examples/) 目录，3 个示范笔记 + 索引模板。
 
+## 贡献
+
+欢迎贡献！流程见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+
+提 issue / feature request / question 都有模板（点 "New issue" 自动选）。
+
 ## 配合 hermes memory
 
 - `~/.hermes/memories/`（2,200 字）：精炼 user preferences / 跨项目 facts

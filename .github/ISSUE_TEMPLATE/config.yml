@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Hermes Agent docs
+    url: https://hermes-agent.nousresearch.com/docs
+    about: 主平台文档
+  - name: Discussions
+    url: https://github.com/huacracker/load-my-notes/discussions
+    about: 通用讨论 / Q&A
