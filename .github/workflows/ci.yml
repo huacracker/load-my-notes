@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    name: Lint & validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Shell syntax check (install.sh)
+        run: bash -n install.sh
+
+      - name: Shell script lint (install.sh via shellcheck)
+        run: shellcheck install.sh
+
+      - name: SKILL.md frontmatter parse
+        run: |
+          head -1 SKILL.md | grep -q "^---$" || { echo "❌ SKILL.md missing opening frontmatter"; exit 1; }
+          grep -q "^name: load-my-notes$" SKILL.md || { echo "❌ SKILL.md frontmatter name mismatch"; exit 1; }
+          grep -q "^category: " SKILL.md || { echo "❌ SKILL.md missing category"; exit 1; }
+          echo "✓ SKILL.md frontmatter OK"
+
+      - name: SKILL.md 6 actions present
+        run: |
+          for action in "动作 -1" "动作 0" "动作 1" "动作 2" "动作 3" "动作 4"; do
+            grep -q "### $action" SKILL.md || { echo "❌ missing action: $action"; exit 1; }
+          done
+          echo "✓ all 6 actions present"
+
+      - name: Examples directory & files
+        run: |
+          test -f examples/README.md || { echo "❌ examples/README.md missing"; exit 1; }
+          test -f examples/INDEX.md || { echo "❌ examples/INDEX.md missing"; exit 1; }
+          test -f examples/2026-06-12-EXAMPLE-项目.md || { echo "❌ EXAMPLE project note missing"; exit 1; }
+          test -f examples/svn-cache-陷阱.md || { echo "❌ svn-cache-陷阱.md missing"; exit 1; }
+          test -f examples/临时/scratch.md || { echo "❌ 临时/scratch.md missing"; exit 1; }
+          echo "✓ all example files present"
+
+      - name: No secrets leaked
+        run: |
+          # 扫真实 token 模式 (排除文档说明 / 字符串内示例)
+          if grep -rnE "(sk-ant-[a-zA-Z0-9_-]{20,}|ghp_[a-zA-Z0-9]{20,}|gho_[a-zA-Z0-9]{20,})" --include="*.md" --include="*.sh" --include="*.yml" .; then
+            echo "❌ 可能的密钥泄漏"
+            exit 1
+          fi
+          # 扫真实火山方舟 token 格式 (ark-uuid-uuid)
+          if grep -rnE "ark-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}-[0-9]+" --include="*.md" --include="*.sh" --include="*.yml" .; then
+            echo "❌ 可能的火山 API key 泄漏"
+            exit 1
+          fi
+          echo "✓ no secrets detected"
+
+      - name: LICENSE present
+        run: |
+          test -f LICENSE || { echo "❌ LICENSE missing"; exit 1; }
+          grep -q "MIT License" LICENSE || { echo "❌ LICENSE not MIT"; exit 1; }
+          echo "✓ LICENSE OK"

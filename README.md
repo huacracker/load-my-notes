@@ -3,6 +3,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/huacracker/load-my-notes?style=social)](https://github.com/huacracker/load-my-notes/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub release](https://img.shields.io/github/v/release/huacracker/load-my-notes)](https://github.com/huacracker/load-my-notes/releases)
+[![CI](https://github.com/huacracker/load-my-notes/actions/workflows/ci.yml/badge.svg)](https://github.com/huacracker/load-my-notes/actions/workflows/ci.yml)
 [![Hermes skill](https://img.shields.io/badge/Hermes-skill-blueviolet)](https://hermes-agent.nousresearch.com/docs)
 
 > 绕 hermes memory 2,200 字符上限的额外记忆加载 skill。
